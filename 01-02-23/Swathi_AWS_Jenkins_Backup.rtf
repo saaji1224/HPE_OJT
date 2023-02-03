@@ -1,0 +1,250 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil Calibri;}{\f2\fnil\fcharset2 Symbol;}}
+{\colortbl ;\red0\green0\blue255;}
+{\*\listtable 
+{\list\listhybrid
+{\listlevel\levelnfc0\leveljc0\levelstartat1{\leveltext\'02\'00.;}{\levelnumbers\'01;}\jclisttab\tx0}
+{\listlevel\levelnfc4\leveljc0\levelstartat1{\leveltext\'02\'01.;}{\levelnumbers\'01;}\jclisttab\tx0}
+{\listlevel\levelnfc3\leveljc0\levelstartat1{\leveltext\'02\'02.;}{\levelnumbers\'01;}\jclisttab\tx0}
+{\listlevel\levelnfc2\leveljc0\levelstartat1{\leveltext\'02\'03.;}{\levelnumbers\'01;}\jclisttab\tx0}
+{\listlevel\levelnfc1\leveljc0\levelstartat1{\leveltext\'02\'04.;}{\levelnumbers\'01;}\jclisttab\tx0}
+{\listlevel\levelnfc0\leveljc0\levelstartat1{\leveltext\'02\'05.;}{\levelnumbers\'01;}\jclisttab\tx0}
+{\listlevel\levelnfc4\leveljc0\levelstartat1{\leveltext\'02\'06.;}{\levelnumbers\'01;}\jclisttab\tx0}
+{\listlevel\levelnfc3\leveljc0\levelstartat1{\leveltext\'02\'07.;}{\levelnumbers\'01;}\jclisttab\tx0}
+{\listlevel\levelnfc0\leveljc1\levelstartat1{\leveltext\'02\'08.;}{\levelnumbers\'01;}\jclisttab\tx0}\listid1 }}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang9 Restoring S3 dataS\par
+You can restore the S3 data that you backed up using AWS Backup to the S3 Standard storage class. You can restore all the objects in a bucket or specific objects. You can restore them to an existing or new bucket.\par
+\par
+If you restore specific objects, you can restore the current version of an object.\par
+\par
+While S3 backups can be copied cross-Region, restore jobs only occur in the same Region in which the original backup or copy is located.\par
+\par
+Example: An S3 bucket created in US East (N. Virginia) Region can by copied to Canada (Central) Region. The restore job can be initiated using the original bucket in US East (N. Virginia) Region and restored to that Region, or the restore job can be initiated using the copy in Canada (Central) Region and restored to that Region.\par
+\par
+\b Use the AWS Backup console to restore Amazon S3 recovery points\par
+\b0 ========================================================\par
+To restore your Amazon S3 data using the AWS Backup console:\par
+
+\pard{\pntext\f2\'B7\tab}{\*\pn\pnlvlblt\pnf2\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 Open the AWS Backup console at {{\field{\*\fldinst{HYPERLINK https://console.aws.amazon.com/backup }}{\fldrslt{https://console.aws.amazon.com/backup\ul0\cf0}}}}\f0\fs22 .\par
+{\pntext\f2\'B7\tab}In the navigation pane, choose Protected resources, and select the Amazon S3 resource ID that you want to restore\par
+{\pntext\f2\'B7\tab}On the Resource details page, you will see a list of recovery points for the selected resource ID. To restore a resource:\par
+
+\pard\sa200\sl276\slmult1\par
+
+\pard{\pntext\f2\'B7\tab}{\*\pn\pnlvlblt\pnf2\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 In the Backups pane, choose the recovery point ID of the resource.\par
+
+\pard\sa200\sl276\slmult1\par
+
+\pard{\pntext\f2\'B7\tab}{\*\pn\pnlvlblt\pnf2\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 In the upper-right corner of the pane, choose Restore.\par
+
+\pard\sa200\sl276\slmult1\par
+
+\pard{\pntext\f2\'B7\tab}{\*\pn\pnlvlblt\pnf2\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 (Alternatively, you can go to the backup vault, find the recovery point, and then click Actions then click Restore.)\par
+
+\pard\sa200\sl276\slmult1\par
+
+\pard{\pntext\f2\'B7\tab}{\*\pn\pnlvlblt\pnf2\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 If you are restoring a continuous backup, in the Restore time pane, select either option:\par
+
+\pard\sa200\sl276\slmult1\par
+
+\pard{\pntext\f2\'B7\tab}{\*\pn\pnlvlblt\pnf2\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 Accept the default to restore to the Latest restorable time.\par
+
+\pard\sa200\sl276\slmult1\par
+
+\pard{\pntext\f2\'B7\tab}{\*\pn\pnlvlblt\pnf2\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 Specify date and time to restore.\par
+
+\pard\sa200\sl276\slmult1\par
+
+\pard{\pntext\f2\'B7\tab}{\*\pn\pnlvlblt\pnf2\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 In the Settings pane, specify whether to Restore entire bucket or perform Item level restore.\par
+
+\pard\sa200\sl276\slmult1\par
+
+\pard{\pntext\f2\'B7\tab}{\*\pn\pnlvlblt\pnf2\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 If you choose Item level restore, you restore up to 5 items (S3 objects) per restore job by specifying each item's S3 URI that uniquely identifies that object.\par
+
+\pard\sa200\sl276\slmult1\par
+
+\pard{\pntext\f2\'B7\tab}{\*\pn\pnlvlblt\pnf2\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 (For more information about S3 bucket URIs, see Methods for accessing a bucket in the Amazon Simple Storage Service User Guide.)\par
+
+\pard\sa200\sl276\slmult1\par
+
+\pard{\pntext\f2\'B7\tab}{\*\pn\pnlvlblt\pnf2\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 Choose Add item to specify another item to restore.\par
+
+\pard\sa200\sl276\slmult1\par
+
+\pard{\pntext\f2\'B7\tab}{\*\pn\pnlvlblt\pnf2\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 Choose your Restore destination. You can either Restore to source bucket, Use existing bucket, or Create new bucket.\par
+
+\pard\sa200\sl276\slmult1\par
+Note\par
+Your \b restore destination bucket must have versionin\b0 g turned on. AWS Backup notifies you if the bucket you select does not meet this requirement.\par
+\par
+If you choose Use existing bucket, select the destination S3 bucket from the dropdown menu which shows all existing buckets within your current AWS Region.\par
+\par
+If you choose Create new bucket, type in the new bucket name. The new bucket defaults to S3 versioning enabled. The Block Public Access (BPA) settings will be toggled off by default. You can modify these settings after you create the bucket in S3.\par
+\par
+You have additional options to choose your Restored object encryption. Use original encryption keys (default), Amazon S3 key (SSE-S3), or AWS Key Management Service key (SSE-KMS).\par
+\par
+If you choose Use original encryption keys (default) but the original object was unencrypted, the restored object will also be unencrypted.\par
+\par
+If you choose Amazon S3 key (SSE-S3), you do not need to specify any other options.\par
+\par
+If you choose AWS Key Management Service key (SSE-KMS), you can make the following choices: AWS managed key (aws/s3), Choose from your AWS KMS keys, or Enter AWS KMS key ARN.\par
+\par
+If you choose AWS managed key (aws/s3), you do not need to specify any other options.\par
+\par
+If you Choose from your AWS KMS keys, select a AWS KMS key from the dropdown menu. Alternatively, choose Create key.\par
+\par
+If you Enter AWS KMS key ARN, type in the ARN into the text box. Alternatively, choose Create key.\par
+\par
+In the Restore role pane, choose the IAM role that AWS Backup will assume for this restore.\par
+\par
+Choose Restore backup. The Restore jobs pane appears. A message at the top of the page provides information about the restore job.\par
+\par
+Limitations:\par
+\par
+AWS Backup creates a backup of all your S3 versions, but restores only the latest version from the version stack at any point in time.\par
+\par
+Considerations:\par
+\par
+Access Control Lists (ACLs) must be enabled in the destination bucket, or the job will fail otherwise. S3 buckets created through the AWS Backup console have ACLs disabled by default (note that restoring with the Create new bucket option will create a bucket with ACLs enabled). To enable ACLs, follow the instructions in Configuring ACLs page.\par
+\par
+Restores of objects are skipped if the source bucket has an object with the same name or version ID.\par
+\par
+Use the AWS Backup API, CLI, or SDK to restore Amazon S3 recovery points\par
+Use StartRestoreJob. You can specify the following metadata during Amazon S3 restores:\par
+\par
+\par
+// Mandatory metadata:\par
+DestinationBucketName // The destination bucket for your restore.\par
+ItemsToRestore // A list of up to five paths of individual objects to restore. Only required for object-level restore.\par
+NewBucket // Boolean to indicate whether to create a new bucket.\par
+Encrypted // Boolean to indicate whether to encrypt the restored data.\par
+CreationToken // An idempotency token.\par
+EncryptionType // The type of encryption to encrypt your restored objects. Options are original (same encryption as the original object), SSE-S3, or SSE-KMS).\par
+RestoreTime // The restore time (only valid for continuous recovery points where it is required, in format 2021-11-27T03:30:27Z).\par
+        \par
+// Optional metadata:\par
+KMSKey // Specifies the SSE-KMS key to use. Only needed if encryption is SSE-KMS.\par
+        \par
+Recovery point status\par
+Recovery points will have a status indicating their state.\par
+\par
+PARTIAL status indicates AWS Backup could not create the recovery point before the backup window closed. To increase your backup plan window using the API, see UpdateBackupPlan. You can also increase your backup plan window using the Console by choosing and editing your backup plan.\par
+\par
+EXPIRED status indicates that the recovery point has exceeded its retention period, but AWS Backup lacks permission or is otherwise unable to delete it. To manually delete these recovery points, see Step 3: Delete the recovery points in the Clean up resources section of Getting started.\par
+\par
+STOPPED status occurs on a continuous backup where a user has taken some action that causes the continuous backup to be disabled. This can be caused by the removal of permissions, turning off versioning, turning off events being sent to Amazon EventBridge, or disabling the EventBridge rules that are put in place by AWS Backup.\par
+\par
+To resolve STOPPED status, ensure that all requested permissions are in place and that versioning is enabled on the S3 bucket. Once these conditions are met, the next instance of a backup rule running will result in a new continuous recovery point being created. The recovery points with STOPPED status do not need to be deleted.\par
+\par
+===========================================================================\par
+\par
+\par
+\b Jenkin Backup \b0\par
+\par
+If you are using Jenkins for a while then you must be aware about the importance of jobs related data and what can happen when the data is lost. This blog provides some ways through which backup and restoring in Jenkins can be carried out.\par
+\par
+The data loss can be the result of hardware or software failure, data corruption, or a human-caused event, or accidental deletion of data.\par
+\par
+The purpose of the backup is to create a copy of data that can be restored in the event of a primary data failure. Backup copies allow data to be restored from an earlier point in time to help the business recover from an unplanned event.\par
+\par
+Why Jenkins needs Backup and Restoring mechanism ?\par
+In Jenkins, all the settings, build logs, and archives of the artifacts are stored under the JENKINS_HOME directory as Jenkins doesn\rquote t use any database. Setting access rights, selecting the necessary plugins and job configuration is quite a laborious process, so it\rquote s a good idea to organize regular backups of all the necessary settings and parameters.\par
+\par
+\b How to perform Backup and Restoring In Jenkins\par
+\b0\par
+
+\pard{\pntext\f2\'B7\tab}{\*\pn\pnlvlblt\pnf2\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 By creating a freestyle project\par
+{\pntext\f2\'B7\tab}By using ThinBackup plugin\par
+
+\pard\sa200\sl276\slmult1\par
+\b How to take backups in Jenkins ?\par
+\b0 The simplest way is to just keep Jobs\rquote s folder separately as backup and whenever it\rquote s needed just copy it back.\par
+\par
+As the build jobs created under this directory contains all the details of each and every individual jobs configured in the Jenkins install. The files related to jobs can be replicated to multiple locations.\par
+\b\i\par
+But again it\rquote s a manual task to copy the files from one location to another so instead let\rquote s leverage Jenkins for B & R process by automating it.\par
+\b0\i0\par
+
+\pard 
+{\pntext\f0 1.\tab}{\*\pn\pnlvlbody\pnf0\pnindent0\pnstart1\pndec{\pntxta.}}
+\fi-360\li720\sa200\sl276\slmult1 Creating a freestyle project to take regular backups\par
+{\pntext\f0 2.\tab}Before proceeding initiate git repository and connect with it.\line\par
+{\pntext\f0 3.\tab}Now lets configure a freestyle project that takes regular backup .\line\par
+{\pntext\f0 4.\tab}Create a new item in Jenkins and choose Freestyle project\par
+{\pntext\f0 5.\tab}In general section provide description if required and omit everything else.\par
+{\pntext\f0 6.\tab}Choose None in Source Code Management section\par
+{\pntext\f0 7.\tab}In Build Triggers section choose Build periodically and provide a cron expression to trigger your backup . For example :\par
+{\pntext\f0 8.\tab}0 12 * * * // will trigger at 12:00pm\par
+{\pntext\f0 9.\tab}45 12 * * * // will trigger at 12:45pm\par
+{\pntext\f0 10.\tab}Then choose Execute shell from the Build section and write a shell script ( or you can use the script provided in extra section at the bottom of this post ) to push the contents of your JENKINS_HOME to GITHUB as a backup which can be pulled whenever required from the same .\par
+{\pntext\f0 11.\tab}Finally save the job and you have automated your backup process.\par
+{\pntext\f0 12.\tab}You can also make this job run after every job you build by selecting build other project option from the post-build section of other project builds.\par
+
+\pard\sa200\sl276\slmult1\par
+---------------------------------------------------------------------------------------------------------------------------\par
+
+\pard\sa200\sl276\slmult1\b To restore Jenkins\b0\par
+
+\pard 
+{\listtext\f0 1.\tab}\ls1\ilvl8\fi-360\li720\sa200\sl276\slmult1\b Go to JENKINS_HOME directory and initiate a new git repository\par
+{\listtext\f0 2.\tab}Cleans the working tree by recursively removing files that are not under version control\par
+{\listtext\f0 3.\tab}Add a new remote and you just have Pull all data from GitHub\par
+{\listtext\f0 4.\tab}Now all you have to do is restart Jenkins and its restored.\par
+
+\pard\sa200\sl276\slmult1\par
+---------------------------------------------------------------------------------------------------------------------------\par
+
+\pard\sa200\sl276\slmult1 Using ThinBackup\b0\par
+===============\par
+Jenkins can be made enormously powerful by integrating several plugins. Here we will use a plugin for the backup management in Jenkins \f1\endash  ThinBackup plugin.\par
+\par
+This plugin backs up the job specific configuration files.\par
+\f0\lang1033 ---------------------------------------------------------------------------------------------------------------------------\f1\lang9\par
+To use this plugin follow the steps defined below :\par
+
+\pard 
+{\pntext\f1 1.\tab}{\*\pn\pnlvlbody\pnf1\pnindent0\pnstart1\pndec{\pntxta.}}
+\fi-360\li720\sa200\sl276\slmult1 From the Jenkins home page, click on Manage Jenkins and in the next page click on Manage plugins .\par
+{\pntext\f1 2.\tab}Now download and install the ThinBackup plugin.\par
+{\pntext\f1 3.\tab}After downloading you must be able to see 3 options as:\par
+{\pntext\f1 4.\tab}Backup Now\par
+{\pntext\f1 5.\tab}Restore\par
+{\pntext\f1 6.\tab}Settings\par
+{\pntext\f1 7.\tab}Click on Settings link to configure the backup options.\par
+{\pntext\f1 8.\tab}Just provide the configuration details as required and save the settings.\par
+{\pntext\f1 9.\tab}Provide a persistent location for Backup directory\par
+{\pntext\f1 10.\tab}Then write a cron expression to schedule backup in Backup schedule for full backups\par
+{\pntext\f1 11.\tab}Check the required options and save it.\par
+
+\pard\sa200\sl276\slmult1 Now from this point ThinBackup plugin will automatically take backup for your Jenkins and store it in some persistent location provided.\par
+\f0\lang1033 ===========================================================================\f1\lang9\par
+\b Restoring in Jenkins\par
+\b0 If your Jenkins fail for any of the reason then :\par
+\par
+
+\pard 
+{\pntext\f1 1.\tab}{\*\pn\pnlvlbody\pnf1\pnindent0\pnstart1\pndec{\pntxta.}}
+\fi-360\li720\sa200\sl276\slmult1\b Restart Jenkins\par
+{\pntext\f1 2.\tab}Download the ThinBackup plugin again and specify the same location persistent location for Backup directory as specified earlier .\par
+{\pntext\f1 3.\tab}Now this time select restore option\par
+{\pntext\f1 4.\tab}Select the desired backup from Restore Configuration page.\par
+{\pntext\f1 5.\tab}Its done\par
+{\pntext\f1 6.\tab}Related pictures\par
+{\pntext\f1 7.\tab}Backup and Restoring in Jenkins\par
+{\pntext\f1 8.\tab}Backup and Restoring in Jenkins\par
+{\pntext\f1 9.\tab}Ready to gain a competitive advantage \b0 with Future Ready Emerging Technologies?\par
+
+\pard\sa200\sl276\slmult1\par
+\f0\lang1033 =====================================================================================================================================================\f1\lang9\par
+\par
+\b Script to push the content of your JENKINS_HOME\b0\par
+\par
+cd $JENKINS_HOME\par
+BACKUP_TIME=$\{date\}\par
+git add .\par
+git commit -m "backup-$BACKUP_TIME"\par
+git push -u origin master\par
+echo "backup pushed successfully"\f0\par
+}
+ 

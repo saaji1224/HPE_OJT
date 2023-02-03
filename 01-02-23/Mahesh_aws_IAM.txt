@@ -1,0 +1,70 @@
+﻿Identity And Access Management Interview Questions:
+
+1. What’s AWS IAM?
+The IAM’s full form is Identity and access management.
+
+2. Are root users and IAM users the same?
+No, the root user is also called the master user. The IAM user is subset of the root user.
+
+3. In the IAM service, can we monitor the IAM user activity?
+Yes, you can monitor the actives of IAM users. If any violation, you can remove access for the IAM user
+
+4. How authentication is controlled in the IAM service?
+* You can mange the users. You can control access keys, passwords, multifactor authentication.
+* Manages federated users
+
+5. What is federated user access management?
+A user who is allowed to access AWS resources from third-party vendors – such as Google, Facebook, Linked In, Corporate credentials, etc.
+
+6. What is Authorization in terms of AWS IAM service?
+It’s to provide authorization for certain AWS resources – not all.
+The best example is providing read-only access to the ‘S3’ service.
+
+7. How to control Authorization in AWS IAM?
+You can control authorization by creating policies.
+
+8. What’s the other name of the IAM user?
+You can also be called an IAM entity.
+
+9. What is CloudTrail in AWS?
+It’s a service, which records the logs of each IAM entity. So that you can use these logs for auditing and compliance purposes.
+In these logs you will get answers for Who, When, Where, What, Which
+* Who made the request?
+* When was the request made?
+* What was the request about?
+* Which resources were acted upon in response to the request?
+* Where was the request made from and made to?
+
+10. What are the 5 top security credentials in AWS IAM?
+* User-id and Password
+* E-mail address and Password
+* Access Keyes
+* Key pair
+* Multi-factor authentication
+
+11. What are AWS IAM roles?
+User – Specific IAM entity
+Group – These people will have the same kind of Access
+
+12. What are the top AWS IAM Roles?
+In AWS IAM there are two types of roles. The IAM user will have a permanent identity. The federated user will not have an identity.
+
+13. What is the IAM Hierarchy of Privileges?
+* Root user
+* IAM user
+* user with temporary credentials
+
+14. What is the total number of buckets that can be created in AWS by default?
+100 buckets can be created in each of the AWS accounts. If additional buckets are required, increase the bucket limit by submitting a service limit increase.
+
+15. What are the possible connection issues you encounter when connecting to an Amazon EC2 instance?
+* Unprotected private key file
+* Server refused key
+* Connection timed out
+* No supported authentication method available
+* Host key not found,permission denied.
+* User key not recognized by the server, permission denied.
+
+16. How is stopping an Amazon EC2 instance different from terminating it?
+Stopping an Amazon EC2 instance result in a normal shutdown being performed on the instance, and the instance is moved to a stop state. 
+However, when an EC2 instance is terminated, it is transferred to a stopped state, and any EBS volumes attached to it are deleted and cannot be recovered.

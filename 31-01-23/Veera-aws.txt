@@ -1,0 +1,67 @@
+EC2- Trouble shooting.
+
+if get the below error while connecting to the ec2 instance need check below all possibilities.
+Network error: timed out error.
+
+1. Need to check with the security group --- 3389/22(windows(RDP) / tcp-linux) --> go to security group and check the open ports. 
+
+2. Instance current status need check ...
+
+3. Ec2 instance status checks 2/2 pass (Hard ware and fronted like os , network system and ebs volume is healthy)
+
+      1/2 ---> N/W, Antivirus, EBS , Network interface need to check.===>>> need to stop and start
+	 if stop and start at that time ec2 instance will move from one physical host to another physical host aws has its own alogitham that is follow when stop and start. 
+	
+	0/2-- hardware issues need to check.. 
+
+4. Need to check instance screenshot from EC2 instance. 
+	Actions--> monitor and troubleshoot ---> get instance screenshot (here show if any errors are there) BSOD error shows here
+
+5. System logs form ec2 console.. 
+	Actions--> monitor and troubleshoot ---> get system logs (shows the logs in that if any error for booting process or error for starting process )
+
+6. Cloud trail ---> is there any recent changes to that instance.
+
+	removed elastic ip /  removed any ebs volume /  assigned wrong volume 
+
+	to check the activities need to copy insance id and search for cloud trail (open)--> event history --->> search with the insance id then we will get the logs /
+ particular tasks which are done on instance.
+
+
+ Any rule in place on ACL(access control list--> indicates which is allow or deny inbound or outbound traffic at the subnet level)
+	Instacne--> networking--> VPC id(click)--> network ACL---> check with the inbound rule if any deny ---> 
+
+8. Ec2 instance located in private or public subnet ( if located in public we can connect or else need to connect with nat gateway and public subnet.
+
+9. VPC has IGW or  not..
+
+10. VPC has proper route tables or not..(IGW entery or not we need to check)
+
+
+
+ -----------------------------------------------------------------------------------------------------------------------------
+
+1. S3 bucket showing Error access denied.( insufficient permissions to list objects)
+2. S3 access column shows the "error" for all buckets
+3. Troubleshoot "error" in the access field for buckets
+
+point-1:  Check what is the status of other S3 buckets,whether all buckets are showing error or not.
+
+point-2: Check IAM user/Role has the following permissions,
+S3:GetAccountPubliAccessBlock
+S3:GetBucketPubliAccessBlock
+S3:GetBucketPolicyStatus
+S3:GetBucketAcl	
+S3:ListAccessPoints
+
+point-3: Possible login from the root user and check what is the status of the error bucket.
+
+point-4: check the bucket has any custom policy (root account)( goto s3>select properties only s3 policy can be edited by root user)
+------------------------------------------------------------------------------------------------------------------
+AMI IMAGE BACK UP PROCESS:--- ec2 instance->actions->image and templetes-->create image ----->.> one option ticmark enable reboot
+advantages _--we can backup ,we cane share to different region and share the 	AMI IDS to different account ,we can use as a golden image..
+
+
+
+
+

@@ -1,0 +1,87 @@
+CLOUD
+
+In traditional IT model, we would have a corporate data center, within that ther would be lots of racks that 
+housed the various equipements. data center is a special building that is specifically designed to house computing equipement.
+Inside that networking feeds and redundant power supplies.
+IT equipments like servers, storage, systems, routers, switches and firewalls, various networking equipement and backup systems,
+it is capital intensive. corporate office needs to be connected to the data center through private link, that is provisioned just
+for the company's use. IT staff required to design, build, operate and manage all the equipements.
+
+
+Cloud computing:
+	On-demand delivery of IT resources over the internet with pay as you go pricing.
+	
+Cloud computing service models:
+	1.private model: companies will Deploy a private cloud in their on-premise data centers, fully managed by customers who opt for it.
+	2.Infrastructure as a Service: U just deploy virtual machines or virtual servers in the cloud. It will have OS and u can install
+	your application. EX: EC2
+	3.Platform as a service: no longer manage the virtual machines. no OS exists in this model, the developers simply add their
+	applications and code to the platform and it will run. Ex: elastic bean stalk
+	4.Software as a service: nothing to manage by you, you have a software ready to consume. The code, application is built and 
+	offered to you, you simply load your data in, and add records and use the software. Ex: Salesforce.com
+	
+Cloud computing Deployment models:
+	1.private
+	2.public
+	3.Hybrid
+	4.Multicloud
+	
+Scaling up vs scaling out:
+	Scalability: Scalability is where we are able to have more resources assigned to our cloud services, to service increasing demand.
+	Elasticity: it is not only automatic, it will scale up and scale back-in again as demand increases and subsequently decreases.
+	
+	The way we scale whether up or out depends on whether we have a stateful or stateless application. 
+	Scaling up or scaling vertically: when we have stateful applications, Its better to scale up because we don't want to have the users going to different servers and getting 
+	different results, so by scaling up, we add resources, more CPU, more RAM, more disk space, and potentially more network adapters, 
+
+	Scaling out or scaling horizontally: we add additional servers. This is usefull for stateless applications. where it doesn't matter which
+	server the user ends up in connecting to, they see exactly the same thing.
+	
+
+Amazon EBS and Instance stores:
+	By default when we launch our instances, they have one attached EBS volume, EBS volume is a block based storage, that's actually 
+	attached over a network. EBS volume doesn't exist on the ec2 host, it is actually exists over network, volumes appears as disk drives,
+	we can attach EBS volume to any EC2 instance whether it is windows, linux or Mac OS instance. EBS volume exist within avaiability zone.
+	The volume is automatically replicated within the AZ, attaching single EBS to multiple instance is not possible except i02 and i01.
+	IOPS is performance characteristics of the volume. 
+	Throughput is measurement of how much data can be read and written to th disk. 
+
+	Instance store: Instance store volumes are within the server, they are pthysically attached to the host and they offer extremely high
+	performance, it is non persistent, means the data is lost once you terminate the instance. you can't stop the instance, but u can restart
+	your instance, if u terminate your instance, there is no way to keep the data. It can be used as a scratch volume. when data requires high
+	performance.
+	EBS volume exists independently of the instance.
+
+Back-up of EBS volumes: snapshot taken to capture a point-in-time state of an instance, Snapshots are stored on S3, we can take additional
+snapshot, it is incremental, so it captures the changes since the previous snapshot, we can use snapshots to create volumes in different
+AZ.
+
+we can also create AMI's  from snapshots, then can be used to create instances in different AZs.
+
+When we terminate the instance, even the root volume will be deleted. but attached volume will remain as it is. and will be available 
+to attach for another instance.
+
+
+Elastic File System: EFS is a great way to attach a shared storage location to multiple instances in different avaiability zones.
+its linux only and it uses the NFS(network file system) protocol. that's used to access the file system. bcs it runs on linux only
+we have mount points(that is just a location in the file system of the instance) rather than drive letters.
+
+Simple Storage Service (S3): Object based storage system, in an object store, we have a kind of container into which our objects or files
+are actually stored. that is actually s3 bucket. Bucket is a container for your object. objects are files that we upload.
+
+How can we access the objects in the bucket?
+	http protocol used with rest API, known as http methods.
+	get, put methods are used.
+	internet gate way.
+	
+	
+
+
+	
+	
+	
+	
+
+
+
+

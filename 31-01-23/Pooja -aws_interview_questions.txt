@@ -1,0 +1,144 @@
+AWS Interview questions
+
+1. Define and explain the three basic types of cloud services and the AWS products that are built based on them?
+Computing
+Storage
+Networking
+some of the AWS products that are built based on the three cloud service types:
+
+Computing - These include EC2, Elastic Beanstalk, Lambda, Auto-Scaling.
+
+Storage - These include S3, Glacier, Elastic Block Storage, Elastic File System.
+
+Networking - These include VPC, Amazon CloudFront, Route53.
+
+
+2. What is the relation between the Availability Zone and Region?
+AWS regions are separate geographical areas, like the US-West 1 (North California) and Asia South (Mumbai). 
+On the other hand, availability zones are the areas that are present inside the regions. 
+These are generally isolated zones that can replicate themselves whenever required.
+
+
+3.What is auto-scaling?
+Auto-scaling is a function that allows you to provision and launch new instances whenever there is a demand. 
+It allows you to automatically increase or decrease resource capacity in relation to the demand.
+
+
+4. How do you upgrade or downgrade a system with near-zero downtime?
+
+Open EC2 console
+Choose Operating System AMI
+Launch an instance with the new instance type
+Install all the updates
+Install applications
+Test the instance to see if it’s working
+If working, deploy the new instance and replace the older instance
+Once it’s deployed, you can upgrade or downgrade the system with near-zero downtime.
+
+
+
+5.What are the tools and techniques that you can use in AWS to identify 
+if you are paying more than you should be, and how to correct it?
+
+Check the Top Services Table
+	It is a dashboard in the cost management console that shows you the top five most used services. 
+	This will let you know how much money you are spending on the resources in question.
+	
+Cost Explorer
+	There are cost explorer services available that will help you to view and analyze your usage costs for the last 13 months. 
+	You can also get a cost forecast for the upcoming three months.
+	
+AWS Budgets
+	This allows you to plan a budget for the services. Also, it will enable you to check if the current plan meets your budget 
+	and the details of how you use the services.
+	
+Cost Allocation Tags
+	This helps in identifying the resource that has cost more in a particular month. 
+	It lets you organize your resources and cost allocation tags to keep track of your AWS costs.
+	
+
+6.Is there any other alternative tool to log into the cloud environment other than console?
+	Putty
+	AWS CLI for Linux
+	AWS CLI for windows
+	
+	
+7.What is a DDoS attack, and what services can minimize them?
+	 DDoS is a cyber-attack in which the perpetrator accesses a website and creates multiple sessions so that the other legitimate users 
+	 cannot access the service. The native tools that can help you deny the DDoS attacks on your AWS services are:
+	 AWS Shield
+	 AWS WAF
+	 Amazon Route53
+	 ELB
+	 
+	 
+8.You are trying to provide a service in a particular region, but you do not see the service in that region. 
+Why is this happening, and how do you fix it?
+
+Not all Amazon AWS services are available in all regions. When Amazon initially launches a new service, 
+it doesn’t get immediately published in all the regions. They start small and then slowly expand to other regions. 
+So, if you don’t see a specific service in your region, chances are the service hasn’t been published in your region yet. 
+However, if you want to get the service that is not available, you can switch to the nearest region that provides the services.
+
+
+9.How do you set up a system to monitor website metrics in real-time in AWS?
+Amazon CloudWatch helps you to monitor the application status of various AWS services and custom events. 
+It helps you to monitor:
+	State changes in Amazon EC2
+	Auto-scaling lifecycle events
+	AWS API calls
+	Console sign-in events
+	
+10.Name some of the AWS services that are not region-specific?
+IAM
+Route 53
+Web Application Firewall
+CloudFront
+
+
+11.What is CloudWatch?
+Depending on multiple metrics, it participates in triggering alarms.
+Helps in monitoring the AWS environments like CPU utilization, EC2, Amazon RDS instances, 
+Amazon SQS, S3, Load Balancer, SNS, etc.
+
+
+12.With specified private IP addresses, can an Amazon Elastic Compute Cloud (EC2) instance be launched? 
+If so, which Amazon service makes it possible?
+Yes. Utilizing VPC makes it possible (Virtual Private Cloud)
+
+
+13.Mention the different types of instances in  Amazon EC2 and explain its features.
+
+General Purpose Instances: They are used to compute a range of workloads and aid in the allocation of processing, 
+memory, and networking resources.
+Compute Optimized Instances: These are ideal for compute-intensive applications. They can handle  batch processing workloads, 
+high-performance web servers.
+Memory Optimized: They process workloads that handle massive datasets in memory and deliver them quickly.
+Accelerated Computing: It aids in the execution of floating-point number calculations, data pattern matching, and 
+graphics processing. These functions are carried out using hardware accelerators.
+Storage Optimised: They handle tasks that require sequential read and write access to big data sets on local storage.
+
+
+14.Will your standby RDS be launched in the same availability zone as your primary?
+
+No, standby instances are launched in different availability zones than the primary, resulting in physically 
+separate infrastructures. This is because the entire purpose of standby instances is to prevent infrastructure failure. 
+As a result, if the primary instance fails, the backup instance will assist in recovering all of the data.
+
+
+15.What is the difference between a Spot Instance, an On-demand Instance, and a Reserved Instance?
+Spot instances are unused EC2 instances that users can use at a reduced cost.
+
+When you use on-demand instances, you must pay for computing resources without making long-term obligations.
+Reserved instances, on the other hand, allow you to specify attributes such as instance type, platform, tenancy, region, and 
+availability zone. Reserved instances offer significant reductions and capacity reservations when instances in 
+certain availability zones are used.
+
+
+16.How would you address a situation in which the relational database engine frequently collapses when traffic to your 
+RDS instances increases, given that the RDS instance replica is not promoted as the master instance?
+
+A larger RDS instance type is required for handling significant quantities of traffic, as well as producing manual or 
+automated snapshots to recover data if the RDS instance fails.
+
+

@@ -1,0 +1,161 @@
+Vedio1:---
+_______________________________________________
+configaration management:
+
+like all details about mechine called configaration..
+
+management: delete add etc..
+
+
+if do any changes in mechine that is called configaration management.
+
+manual --- system admins (install one packege in 1000 systems ---to do system admin will do in manual process)
+
+automation --- to do in automation we use ansible/chef/puppet/salstack..
+
+managing the configuration of mechine in a automated manner by using any tool is called configuration management tools.
+
+source code managmeet --- by svn/git
+
+cloud mangement by aws /azure...
+
+we are going to manage a mechine configuration in a automated manner is called configuration management.
+
+to install same package in 1000 mechines at once by using any one of configuration management tool..
+
+Infrastructure as a code using we can install at once..
+
+write a code and execute in all mechies ..
+
+code to infra  ---> convert code in to infra called infrastructure as a code..
+
+code we can place in git/ reuasable/ test /
+
+
+configaration management:-- it is a method through which we automate admin tasks..
+configaration management tool turns your code into infrastrucure..
+so your code will be testable, repetable, versionable..
+
+eg: software, netwroks, people, process..
+
+Pain points: 
+1. managing user and group accounts
+2. Dealing with packages
+3. Taking backup
+4. Deploying all kind of applicaitons.
+5. configuration services..
+
+advantages:---
+1.complete automation
+2. Increase uptime
+3. Improve performance
+4. Ensure compliance
+5. Prevent Errors
+6. Reduce cost
+
+
+	Why Ansible
+
+1. Ansible is an adminstration tool, what ever system admins used to do manually, now we are automating all those tasks by using ansible..
+
+2. can us this tool whether your servers are in on-promise or in the cloud
+
+3. It turns your code into infrastrucer ..
+
+versionable
+repetable
+testable
+
+4. You only need to tell what the desired configuration should be, not how to achive it
+
+5. Through automation , get desired state of server.
+
+Vedio--2
+______________________________
+
+servers and nodes..
+
+ansible install in servers only..
+
+communicate with the nodes by servers..
+
+we create file and write some code that is called playbook by using ymal code..
+
+that code run in nodes.. in nodes actual infrastructue will be create..
+--------------------------------------
+
+need to setup module(security guard) . setup module go to nodes and collect the data and give the data to server, if already requiremenet is there then server will not install..
+
+if package is not there then that should be install.
+
+this process is called indempotence..
+
+this idempotence achive by setupmodule
+
+if we want to create a file (playbook) we need modules..(setup nothing but module)
+
+Ansible used push mechanisam..
+
+________________________________________________________________
+
+Vedio 3---:
+
+Take 3 ec2 mechines.
+1- ansible server
+remaining 2 are nodes..
+
+epel reposistary is availbale...
+
+in that we have so many packages .. (ansible , git ,ssl, pip, python)
+
+installation: ------
+-------------------------------
+Download epel
+install epel
+update mechine
+install all dependencies...
+
+1.wget http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+2.yum intall epel-
+3. yum update -y
+4. yum install git pyton python-devel python-pip openssl ansible -y
+5. ansible --version
+
+
+Vedio 4---
+________________________________________--
+
+adduser ansadmin
+passwd ansadmin
+su -ansadmin
+touch file1
+yum isntall tree -y
+exit
+visudo(to add user name)
+ansadmin  // add at root name (ansadmin ALL=(ALL) NOPASSWD:ALL
+sudo yum install tree -y
+ssh ansadmin@ip-address  
+vi /etc/ssh/sshd_config
+in this passwordauthenication yes should be change
+service sshd reload
+ssh ansadmin@ip_address
+ask password : give password
+
+ssh (password less)--- should do in server only...
+
+
+Genete keys:---
+______________________________
+
+ssh-keygen
+ls -a
+cd .ssh/
+ssh-copy-id ansadmin@ipaddress
+____________________________________________________________________
+
+
+
+ 
+
+
+

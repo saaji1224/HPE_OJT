@@ -1,0 +1,55 @@
+AWS Interview questions
+
+1: Difference between Amazon RDS, DynamoDB and Redshift?
+
+Ans: RDS is meant for structured data only. DynamoDB is meant for unstructured data 
+which is a NoSQL service. Redshift is a data warehouse product used for data analysis.
+
+2: What are Lifecycle Hooks?
+
+Ans: Lifecycle Hooks are used in Auto Scaling. Lifecycle hooks enable you to perform custom 
+actions by pausing instances as an Auto Scaling group launches or terminates them. Each 
+Auto Scaling group can have multiple lifecycle hooks.
+
+3: What is S3?
+
+Ans: S3 stands for Simple Storage Service, with a simple web service interface to store and 
+retrieve any amount of data from anywhere on the web.
+
+4: What is AWS Lambada?
+
+Ans: Lambda is an event-driven platform. It is a compute service that runs code in response 
+to events and automatically manages the compute resources required by that code.
+
+5: In S3 how many buckets can be created?
+
+Ans: By default 100 buckets can be created in a region.
+
+6: What is CloudFront?
+
+Ans: Amazon CloudFront is a service that speeds up transfer of your static and dynamic web 
+content such as HTML files, IMAGE files., etc., CloudFront delivers your particulars thru 
+worldwide data centers named Edge Locations.
+
+7: Brief about S3 service in AWS?
+
+Ans: S3, a Simple Storage Service from Amazon. You can move your files TO and FROM S3. 
+Its like a FTP storage. You can keep your SNAPSHOTS in S3. You can also ENCRYPT your 
+sensitive data in S3.
+
+8: Explain Regions and Available Zones in EC2?
+
+Ans: Amazon has hosted EC2 in various locations around the world. These locations are 
+called REGIONS. For example in Asia, Mumbai is one region and Singapore is another 
+region. Each region is composed of isolated locations which are known as AVAILABLE 
+ZONES. Region is independent. But the Available Zones are linked thru low-latency links.
+
+9: What are the two types of Load Balancer?
+
+Ans: Classic LB and Application LB. ALB is the Content Based Routing.
+
+10: Can a AMI be shared?
+
+Ans: Yes. A developer can create an AMI and share it with other developers for their use. A 
+shared AMI is packed with the components you need and you can customize the same as per 
+your needs. As you are not an owner of a shared AMI there is a risk always involved

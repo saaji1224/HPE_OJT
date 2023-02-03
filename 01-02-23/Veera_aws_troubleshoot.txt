@@ -1,0 +1,74 @@
+VPC:-for region max 5vpc we can create .
+vpc create 
+subents 
+routetable edit rules asscoiations 
+internet gate way 
+
+use case :--creating two vpcs and peering each other and in one vpc creating two webservers and only doing public and private
+peering :---is to connect two vpcs----requestor and acceptor ,another account differnt accounts account--ID,Another region in same aws account..
+
+for cereating nat gate way we need public subnet and one elsatic ip -->>
+so that db in public and given internet gate way and web server not given internet gate way 
+so that to connect we need public ip of db and elastic ip
+foe security purpose of servers we use ->>>>ACLS(access control list). security rules inbound and outbond.PORTS --.>>allow and deny using port nos.
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+KEY-MANAGEMENT SERVICE:---
+
+it is used to create and manage keys and control use of encryption acreoss a wide range of aws security.
+it is default keys in aws 
+cmk keys:-customer managed keys 
+
+properties:---Default Enceryption:--enable--(s3 -managed key) sse-s3
+encryption key that amazon s3 creates ,manages and user for you
+if we encrypt a bucket when we add objects after encryption it will be encrypted .
+
+
+customer managed keys :---
+first we should create key 
+2types :--
+1)symmetric and assymetric
+
+1)symmetric keys :--
+one single keys used for encyption and decryption the date and generates and verifies the HMAC codes
+
+HMAC (Hash-based Message Authentication Code) is a type of a message authentication code (MAC) that is acquired by executing a
+ cryptographic hash function on the data (that is) to be authenticated and a secret shared key. 
+Like any of the MAC, it is used for both data integrity and authentication. 
+Checking data integrity is necessary for the parties involved in communication. HTTPS, SFTP, FTPS, and other transfer protocols use HMAC. 
+The cryptographic hash function may be MD-5, SHA-1, or SHA-256. Digital signatures are nearly similar to HMACs i.e they both employ a hash function and a shared key. 
+The difference lies in the keys i.e
+HMACs use symmetric key(same copy) 
+
+2)asymmetric :----
+a public key and private key pair used fro ecryption and decryption data or singing and verfiying the messages .
+
+key rotation service:-automatically rotate this key every year .
+Schedule key Deletion:--we cant't delete immediately waiting period 7 to 30 days notice periods .
+-----------------------------------------------------------------------------------------------------------------------------
+
+ELASTIC LOAD-BALANCING:---
+
+Elastic Load Balancing automatically distributes your incoming traffic across multiple targets, such as EC2 instances, containers, and IP addresses,
+ in one or more Availability Zones.
+ It monitors the health of its registered targets, and routes traffic only to the healthy targets. 
+types :--application and classic
+
+Troubleshooting:--
+application load balancer:-
+.)load balacer backend instances status in service /Healthy
+.)if load balacers backend instances state is out of service/unhealthy
+.)check the health of instances 2/2 check is passed or not .
+.) ckeck security groups and acl for required ports is opened or not 
+.)ckeck default vpc in acls ports is allowed/deny of required .
+.)load balancer health check configuration need to be verified .
+.)try to restart the application service inside of backend ec2 instances .
+.)check for the ALB forwarding rules comfigured proprely.
+.)check the public and private subnets 
+.)check vpc for IGW(interior gateway ) is connected or not .
+.)cloud trail:-ckeck any recent changes to that instances.
+.)finally check the instance statrt and stop.
+
+

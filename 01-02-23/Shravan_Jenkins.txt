@@ -1,0 +1,76 @@
+Jenkins :---
+
+Jenkins follow the master and slave architecture.
+
+Master Node:-- 
+Master  node will work lika scheduler , which is managed and schedule on the worker
+schedule the build jobs
+Like if we have 100 jobs that will that 100 jobs will scheduled to each slave based on capcity.
+
+Dispactcing build to the slave for the execution.
+
+monitor the slave
+
+recordingt and prestenting the build result
+
+can also execute build job dirctly..
+
+slave:--
+
+A slave is a java executaable that runs on a remove mechine
+
+it haears requestsfrom the jenkins master instance
+
+slave can run an a verity of operting system
+
+the job of a slave it to do as they are told to which involves execcuting build jobs dispatching byn\ the master
+
+Declartative pipeline:
+
+pipeline{
+	agentany{
+	stages{
+		stage(INIT){
+			steps{
+			}
+		stage(Build){
+			steps{
+			}
+		stage(Deploy){
+			steps{
+			}
+		}
+	}
+}
+
+Standard:
+
+node
+Stage('Build')
+	{
+		steps
+	}
+stage('Test'){
+	steps
+}
+stage('Deploy)
+	{
+	steps
+}
+
+
+Docker file:---
+___________________________
+
+From : instruction from base image
+Maintainer: who is going to manintain
+workdir -- container path
+copy-- copy and place in some where
+add-- download any url and add to working directory
+expose-- port numbers
+RUN-- it will help the execute comands
+arg-
+env-variables
+cmd--execute commands
+entrypoint-- continewill be exit..
+

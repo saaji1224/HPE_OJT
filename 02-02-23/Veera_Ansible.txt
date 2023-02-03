@@ -1,0 +1,89 @@
+ANSIBLE:-----automation
+
+ansible is an adminstarative tool, what ever system admins (linux,windows)used to do manually,now we are automating all those
+tasks by using ansible(any cm tool)
+.can use this tool whether your servers are in on-premises or in the cloud.
+ 
+
+configuration management tool:-
+it is a method through which we automate admin tasks.
+configuration management tool turns your code into infrastructure 
+so code would ne testable,repeatable and versionable
+ Configuration Details:--
+  software 
+  network
+  people:users and groups
+  process:what process are running
+
+why configuration management:-
+       .complete automation
+       .increase uptime
+       .improve performance
+       .ensure compliance
+       .prevent errors 
+       .reduces cost
+
+Inventory
+The “inventory” is a configuration file where you define the host information. In the above
+/etc/ansible/hosts example, we declared two servers under test-hosts.
+
+Playbooks
+In most cases – especially in enterprise environments – you should use Ansible playbooks. A
+playbook is where you define how to apply policies, declare configurations, orchestrate steps and
+launch tasks either synchronously or asynchronously on your servers. Each playbook is composed of
+one or more “plays”. Playbooks are normally maintained and managed in a version control system
+like Git. They are expressed in YAML (Yet Another Markup Language).
+
+Plays
+Playbooks contain plays. Plays are essentially groups of tasks that are performed on defined hosts to
+enforce your defined functions. Each play must specify a host or group of hosts. For example, using:
+ – hosts: all
+…we specify all hosts. Note that YML files are very sensitive to white spaces, so be careful!
+
+Tasks
+Tasks are actions carried out by playbooks. One example of a task in an Apache playbook is:
+- name: Install Apache httpd
+A task definition can contain modules such as yum, git, service, and copy.
+Roles
+A role is the Ansible way of bundling automation content and making it reusable. Roles are
+organizational components that can be assigned to a set of hosts to organize tasks. Therefore,
+instead of creating a monolithic playbook, we can create multiple roles, with each role assigned to
+complete a unit of work. For example: a webserver role can be defined to install Apache and Varnish
+on a specified group of servers. 
+-----------------------------------------------------------------------------------------------------
+example of Play-book:-
+
+---
+- name: Update web servers
+  hosts: webservers
+  remote_user: root
+
+  tasks:
+  - name: Ensure apache is at the latest version
+    ansible.builtin.yum:
+      name: httpd
+      state: latest
+  - name: Write the apache config file
+    ansible.builtin.template:
+      src: /srv/httpd.j2
+      dest: /etc/httpd.conf
+---------------------------------------------------------------------------------------------------------------------
+
+
+
+How do you handle build failures in Jenkins?
+Handling build failures in Jenkins involves the following steps:
+
+Monitor build status: Regularly monitor the build status in the Jenkins web interface to quickly identify build failures.
+
+Review build logs: Review the build logs to identify the cause of the build failure. Build logs provide detailed information about the build process, including any error messages or exceptions.
+
+Troubleshoot the issue: Troubleshoot the issue causing the build failure by following established troubleshooting procedures or by seeking help from the development team or community forums.
+
+Update the build process: Update the build process to prevent similar build failures in the future. This may involve updating build scripts, configuring build dependencies, or modifying build steps.
+
+Re-run the build: Re-run the build once the issue has been resolved. Verify that the build is successful and that the build artifacts are generated correctly.
+
+Document the issue: Document the issue causing the build failure and the steps taken to resolve it. This information can be useful for future reference and for continuous improvement of the build process.
+
+By following these steps, you can effectively handle build failures in Jenkins and keep your build environment running smoothly

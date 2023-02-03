@@ -1,0 +1,138 @@
+EC2- Trouble shooting.
+
+if get the below error while connecting to the ec2 instance need check below all possibilities.
+Network error: timed out error.
+
+1. Need to check with the security group --- 3389/22(windows(RDP) / tcp-linux) --> go to security group and check the open ports. 
+
+2. Instance current status need check ...
+
+3. Ec2 instance status checks 2/2 pass (Hard ware and fronted like os , network system and ebs volume is healthy)
+
+	1/2 ---> N/W, Antivirus, EBS , Network interface need to check.===>>> need to stop and start
+	 if stop and start at that time ec2 instance will move from one physical host to another physical host aws has its own alogitham that is follow when stop and start. 
+	
+	0/2-- hardware issues need to check.. 
+
+4. Need to check instance screenshot from EC2 instance. 
+	Actions--> monitor and troubleshoot ---> get instance screenshot (here show if any errors are there) BSOD error shows here
+
+5. System logs form ec2 console.. 
+	Actions--> monitor and troubleshoot ---> get system logs (shows the logs in that if any error for booting process or error for starting process )
+
+6. Cloud trail ---> is there any recent changes to that instance.
+
+	removed elastic ip /  removed any ebs volume /  assigned wrong volume 
+
+	to check the activities need to copy insance id and search for cloud trail (open)--> event history --->> search with the insance id then we will get the logs / perticular tasks which are done on instance. 
+
+Network errors on EC2 instances:
+____________________________________________________________________________________________________
+
+
+7. Any rule in place on ACL(access control list--> indicates which is allow or deny inbound or outbound traffic at the subnet level)
+	Instacne--> networking--> VPC id(click)--> network ACL---> check with the inbound rule if any deny ---> 
+
+8. Ec2 instance located in private or public subnet ( if located in public we can connect or else need to connect with nat gateway and public subnet.
+
+9. VPC has IGW or  not..
+
+10. VPC has proper route tables or not..(IGW entery or not we need to check)
+
+
+_____________________________________________________________________________________________________________________________
+
+ S3-Trouble shooting:----
+
+s3 bucket showing access denied / failed.
+troubleshoot error in the access filed for buckets
+s3 access column shows error for all buckets
+
+trouble shoot points:---
+__________________________
+
+1 Check what is the status of the other s3 buckets, wether only perticular bucket showing error or all the buckets are showing the errror.
+   			Access------> Error
+
+in this scenario perticular bucket has some special permissions. 
+
+objects can be public or not need to check .......
+
+2. CHeck Iam user /roles has the following permissions. 
+
+	getaccountpublicaccess block
+	getaccountpublicaccessblock
+	get bucket policy status
+	getbucket acl
+	list accesspoints
+
+check with the iam user permissions.. 
+
+3. Possible login from the root user and check what is the status of the error bucket.
+
+after login as a root user need to  check for iam user permissions and s3 bucket level settings also need check..
+
+after that chcek for the bucket if any error showing..
+
+4. check for the bucke has any custom polices..
+
+	check with IP ranges and all if any deny permission on the custom policy.
+
+
+_____________________________________________________________________________________________________________________________
+
+Auto scalling trouble shooting...(With out ELB auto scaling will not work)-- using cloud watch metric we can check cpu utilization.
+
+auto scalling we can do in two ways.
+
+1. horizantal ----adding ec2 instances 
+2. vertical ---- increesing ec2 instance size....(here we have down time becaus low configured ec2 will be crash and creat new ec2 )
+
+
+ec2 instances 3 or more, assigned elastic ip address and manged by ELB, elb will check for the health check of ec2 instances 
+
+ELB must have target groups and that shoulbe configured with ASG.
+
+Target group will be decide ec2 instance register / derigister...
+
+
+Horizantal having 3 types:
+
+1. dynamic (cpu uti >80%)
+2. schedule scaling (perticular time)
+3. predctive scaling(mechine learing algortiham)
+
+solution: 
+
+auto scalling group creation:
+
+first need to creat auto scalling by using launch configaraion.
+
+then based on above need to create auto scalling group.
+
+need to metnion : Desired capacity(need to specify in b/w maximum and minimum capacity), minimum capacity, maximum capacity
+
+Desired ---> while creating the asg how many instance need ...
+
+need to configured threeshold volues like, cpu utilization..
+
+scale in scal out...
+
+
+
+ AWS EC2 Autoscaling issue.
+ Troubleshooting scalling issues with my amazon ec2 auto scalling group.
+ ec2 auto scalling group isnt following the scalling policy i configured
+ ec2 auto scalling group is scalling out insted of scalling in
+ ec2 auto scalling group is not responding to cloud watch alarm or health check replacement.
+ ec2 auto saclling group is not responding to the sceduleed action.
+
+
+
+1.Need to check scalling polices to see wehter an event triggers more than one policy...
+
+	check for dynamic scalling policy , whether CPU utilization need to check 
+
+2. Verfiy scale out and scale in policy are triggered at the same time..(scale out ---> create one more instance, scale in ---> derigister the ec2)
+
+3. 
