@@ -1,0 +1,113 @@
+CI/CD for Applications: A Quick Refresher
+Continuous Integration (CI) and Continuous Delivery (CD) refer to a set of practices
+development teams can use to produce and deliver software for business teams. CI/CD
+practices are not uniformly defined by a standards body such as ISO, but instead are
+explored, implemented, integrated, and continuously refined as part of an organization’s
+core business processes.
+
+Although specific CI/CD processes evolve differently within each organization, all
+organizations tend to experience the same benefits:
+• Better quality software with fewer defects through production
+• Faster delivery of business ideas to market by enabling faster release cycles and
+allowing changes in days or weeks rather than months or quarters
+• Cheaper implementation across the entire lifecycle, including less time spent
+coding, deploying, and testing software changes
+These seem almost too good to be true, yet organizations in all domains, from banking to
+games, reap benefits.
+
+While this guide doesn’t dive into the details of how to implement CI/CD for applications,
+we cover the key mechanisms that drive success (pipelines) and demonstrate how you
+can apply CI/CD practices to infrastructure and change management.
+
+Pipelines: The Heart of CI/CD
+
+One of the key components of Continuous Delivery (CD) is the deployment pipeline.
+Pipelines model the software release process by defining the servers and environments
+that builds will be deployed to as well as the manual and automatic approvals required at
+each stage of the process. Different applications may use different pipelines, or the same
+application may use different pipelines for different releases.
+
+For example, a basic web application might use a pipeline with only two stages (testing
+and production) and simply deploy to a different folder on the same server. Another
+application may require a dozen stages, each with multiple targets that go to different
+
+
+environments and with all sorts of automatic and human approvals to meet compliance
+requirements.
+End-to-End Software Delivery with CI/CD
+Deployment pipelines require an input (i.e. the build to deploy), and that input comes
+from Continuous Integration (CI). Specifically, this input is a build artifact: essentially a
+zipped file containing the code that will be deployed to each server across each
+environment.
+
+When you combine CI’s build artifacts and CD’s deployment pipelines together, you have
+the essence of CI/CD: end-to-end software delivery.
+
+The Cardinal Rules of CI/CD
+Although the implementation details of a CI/CD process differ from organization to
+organization, they will all share a set of cardinal rules:
+• One codebase, many environments.
+o DO build one version of your application that’s used by all of your
+environments from the same codebase or branch in source control.
+
+o DON’T build an “integration version” of the application from an integration-
+quality branch then test that version and merge changes to a testing branch.
+
+Likewise, don’t build a “testing version” for the testing environment. Don’t
+test and merge all the way to production.
+
+• Deploy the entire application or component.
+o DO deploy the entire build artifact produced by the CI process to each
+environment. Let your deployment tool optimize this process such that
+unchanged files on disk are not actually copied over a network.
+o DON’T cherry-pick files that changed between each environment to mitigate
+risk.
+
+• Model process with automatic and manual gates.
+o DO strike a balance between automated and user testing modeling business
+processes and bringing development and business teams together.
+o DON’T force a fully-automated process or fully-manual process on business
+users.
+
+• Ensure traceability and auditability at every step.
+o DO ensure that every production deployment can be traced back to a change
+in source control and can be audited to see who approved it and when.
+o DON’T bypass the process through emergencies; instead, build an emergency
+process.
+
+A CI/CD tool like BuildMaster (inedo.com/buildmaster) facilitates and implements these
+practices.
+Software Delivery without CI/CD
+Without an end-to-end software delivery process, releases are often deployed by a
+release engineer on an ad-hoc basis at the direction of someone on a business or
+development team. Although these deployments are usually not manual (i.e. by logging
+into servers and copying files), release engineers use a deployment tool or script that
+models a manual process.
+Manual delivery processes mitigate risk by deploying infrequently (since fewer
+deployments means fewer production failures) and by cherry-picking files. This starts by
+
+
+having developers use a build process (either CI or manual) and specifying which files
+from a build output to deploy to the first pre-production environment.
+The application is tested in the first environment. The developers then specify which files
+to deploy to the next environment based on which parts of the application passed testing.
+The process continues to production.
+
+At each step in the process, a different set of files may be deployed to each server, and
+different sets of files comprise the applications in each environment. Ultimately, a
+different application is being tested in each environment leading to:
+• Lower quality software in production because testing at all levels was too difficult
+• Slower delivery of changes to production from manual and ad-hoc processes
+• Costly implementation from bug fixes and arduous testing/deployment processes
+
+
+CI/CD Implementation Challenges
+
+Although CI/CD can greatly improve software delivery processes, implementation often
+challenges technically. The largest and most difficult-to-address challenges tend to be
+cultural and behavioral.
+Everyone involved in the delivery process—from release engineers to testers and business
+stakeholders—is accustomed to the way things are. They recognize it’s suboptimal, but
+changing it could make things even worse and, ultimately, make their lives more difficult.
+Like all organizational changes, it’s important to get “buy-in” from those committed to the
+existing process. That often involves “selling” them on the new process

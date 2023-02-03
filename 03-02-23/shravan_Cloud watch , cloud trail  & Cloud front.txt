@@ -1,0 +1,154 @@
+Cloud trail: --
+_________________________________________
+
+account level activity loging 
+
+if s3 bucket is create if we have know who is created this bucket, which perticular user is created , on which perticular ip s3 bucket created these type of details should be save in one perticular location. that locaiont is called cloud trail.. aws acoutn will be use by multiple user, like dev , prod, test env...
+
+to know the perticular user what kind of actions he is doing .. 
+
+activities from : CLI / programing/ GUI ..
+
+all the records are stored in colud trail
+
+for all aws actions we have actiong having name --terminated instance, s3 buckte created, 
+
+if go and check in the cloud trail we will know all the info in cloud trail...
+
+two main points are there:
+
+trails and event history..
+
+Event history: ---
+
+by default event histroy is enabled.. any mis activities easily we can know..
+
+acount security/ audit purpose --- even history we cant delete any thing... root user also dont have permision to delete or modify...
+
+no charges
+
+90 days data only availbale..
+
+dev ,test env we can use event history
+
+no integration...--->not possible to  keep in s3 bucket
+
+two types of events:--
+write and read events... 
+
+actions like stop, start, modify anything write events..
+
+management events: --all services
+data events: -- s3, lambda, dynamo db..
+insight:--
+
+read events:-- just watching like how many ec2 are there like
+
+trail:----
+
+Trails also create logs only...--- need to create one custom enables..
+
+this has chargs..
+
+for prod env we can use trail
+
+possible to keep in s3 bucket..
+
+integration support --- s3 , cloudwatch logs, event bridge...
+
+two types of trail: region based and multi region.. 
+
+cloud front: ---
+______________________
+if hosted one website in mumbai region , usersn trying to access the websit from various locations then we have below issues..
+
+1.DNS will analyse and give the resolution to avoid latency...
+2. Data copy..
+
+CDN-- content delivery network..
+
+if upload in one place .,, everything will be uploaded by CDN..
+
+CDN nothing but cloudfront...
+
+clode fare also one service in other providers...
+
+Regions , availability zones and Edge locations( only  cloud front)..
+
+
+to avoid latency for accessing any website ...
+
+cloudfront to avoide latency..
+
+creating cloudfront nothing but dstribution.. 
+
+distribution (for every distribution one url wil be provide by cloud front) ---> origin 
+
+first time endpoint will check the perticulars availbel in nearest locaiton or not . if not 
+d
+origin will give the data to user and copy in the all possible edge locations..
+
+second time takes from cloudfront..
+
+if any changes in websit that time that will give old one only.. to remove this we use expiration(24hrs)..
+
+if we want to immidate changes in all edge location we use invalidate option..
+
+
+
+
+
+
+
+cloud watch: ----(Monitoring tool)
+__________________________________________
+
+application related logs we will check 
+
+what is cloud watch.
+
+if you deploy one messenger app in cloud and once users are up then application goes down..
+
+two reasons are there.. for go down ..
+
+1.complex mutitier application..
+2. not using any cloudwatch service..
+
+if use cloudwatch we know the performance, cost(if cpu utilizatoin down at that time we can down the ec2 insatnces ), detecting errors and troubleshooting.. 
+
+detailed report regarding performance..
+hleps us to reduse the cost unneccessarly paying to cloud..
+detect problems at early stage so that we can prevent speedly..
+
+by using cloud watch we can monitor of aws resources which are running on amazon infra..
+
+two levels of monitoring.
+Basic monitoring: -- less prequently, limited choice of metrics.
+
+Detailed monitoring. --- all resourse monitor in frequently .. need to pay based on usage.
+
+monitoring serveice by cloud watch..
+
+tack key metrics.
+collect monitor and stores log files.
+sns and lambda (system events)
+create alarms and send notifications..
+
+
+collect the metrics and logs ---> visualize the metrics logs in a cloud watch dashbaord ---> automated responce ---> real time analysis..
+
+creat one cloudwatch---> create --> SNS---> create one sns with email notification ---> metrics ---> cpu <80%  
+
+
+SNS (Simple notification service) :-- term of sms , email 
+
+Ec2 , auto scaling , cloudwatch , EBS 
+
+Ec2 -- Statistics.. metrics
+auto scalling --> based on load 
+cloud watch --> statistics and performance...
+
+two topics are there in sns
+1.topic ---group
+2.subscription--user 
+

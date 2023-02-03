@@ -1,0 +1,399 @@
+Kubernetes:
+	POD:
+		With Kubernetes our ultimate aim is to deploy our application in the form of containers on set of machines that are configured 
+		as worker nodes in a cluster. However Kubernetes doesn't deploy containers directly on the worker nodes. The containers are 
+		encapsulated into a Kubernetes object known as PODs. A POD is an single instance of an application. POD is the smallest object u can 
+		create in Kubernetes.
+		EX: We have a single node Kubernetes cluster with a single instance of your application, running in a single docker container 
+		encapsulated in a POD. when no. of users accessing your application increases and you need to scale your application, in such 
+		situation we create new POD all together with a new instance of the same application. Now we have 2 increases of our web application 
+		running on two seperate PODs on the same Kubernetes system or node. When user base further increases and current node has no 
+		sufficient capacity, Well then you can always deploy additional PODs on a new node in the cluster. 
+		from this we can understand that PODs have one-to-one relationship with containers running your application. To scale up you create
+		new PODs. And to scale down you delete the existing POD. You do not add additional containers to an existing pod to scale your 
+		application. 
+		
+		
+	A single POD can have multiple containers, except for the fact that they are usually not multiple containers of the same kind. if we
+	want to scale our application, then we would need to create additional PODs. but sometime you might have a helper container that might
+	be doing some kind of supporting task for our web application. In such case we can have both of these containers part of the same POD.
+	when a new application container is created, the helper is also created and when it dies, the helper also dies, since they're part of
+	the same POD. The two containers can communicate each other diretly by referring to each other as localhost, since they share same 
+	network space. and they can share the same storage space.
+	
+	With Kubernetes we just need to define what containers a pod consists of and the containers in a pod by default will have access to
+	the same storage , the same network namespace and same fit as in they will be created together and destroyed together. Kubernetes 
+	compulsorily requires you to create pods even though application didn't happen to be complex or we could live with a single container.
+	This is good in long run as your application is equipped for architectural changes and scale in the future. 
+	
+	Kubectl run nginx --image nginx: This command deploys a Docker container by creating a POD. It creates a POD automatically and deploys 
+	an instance of the Nginx docker image. 
+	
+	Kubectl get pods: helps to see the list of pods in our cluster. 
+	
+Kubernetes uses YAML files as inputs for the creation of objects such as pods, replicas, deployments, services etc., 
+
+Kubernetes definition file always contains four TOP level fields.
+	apiVersion:
+	kind:
+	metadata:
+	
+	spec:
+		you must have them in your configuration file.
+
+		
+apiVersion: This is the version of Kubernetes API we are using to create the object. for PODs it is V1. (string)
+		Possible values for other field are: 
+								POD : v1
+								service: v1
+								ReplicaSet: apps/v1
+								Deployment: apps/v1
+								
+								
+kind: refers to the type of object we are trying to create. Ex: PODreplicaset, deployments. (string)
+
+
+metadata: data about the object like its name, labels etc., (dictionary)
+metadata:
+	name: (string value)
+	labels: (dictionary value)
+		app:
+		type:
+		
+		
+spec: we provide additional information to kubernetes pertaining to that object. (dictionary value). Here we specify what is inside 
+		the object we are creating.
+spec:
+	containers: (list value (list of objects)) bcs a POD can have multiple containers so it is a list. 
+		- name:
+		  image:
+		  
+once file is ready run: kubectl create -f pod-definition.yml --> this creates the POD. 
+						kubectl apply -f pod-definition.yml
+
+commands:
+	kubectl get pods
+	kubectl describe pod <name of the pod>  --> information about the POD, when it was created, what labels are assigned to it,
+												what docker containers are part of it. and events associated with that POD.
+												
+												
+While creating POD definition file, for indentation 2 spaces are used.
+
+
+
+Questions in POD.
+1. Create a POD with the nginx image?
+	kubectl run nginx --image=nginx
+	
+2. To find out the node name on which pod have been placed.
+	kubectl get pods -o wide
+	
+3. How many containers are part of the POD webapp?
+	kubectl describe pod webapp
+		Under this in containers block u need to check.
+		
+4. Whta images are used in new webapp pod?
+	kubectl describe pod webapp
+		Under this in containers block u need to check.
+		
+5. what is the state of the container agentx in the pod webapp?
+	kubectl describe pod webapp
+		Under this in containers block u need to check.
+			 under container block, u need to check in agentx block options.
+			 
+6. Why do you think the container agentx in pod webapp is in error?
+	kubectl describe pod webapp
+		Under this in events block u need to check.
+		
+7. what does the ready column in the output of kubectl get pods command indicate?
+	running containers in POD/total containers in POD.
+	
+8. delate the webapp pod?
+	kubectl delete pod webapp
+	
+9. create a new pod with the name redis and with the image redis123?
+	kubectl run redis --image=redis123
+	
+	creating using yaml file.
+		kubectl run redis --image=redis123 --dry-run=client -o yaml > redis.yaml
+		kubectl create -f redis.yaml
+		
+10. To change the image name in the existing pod.
+	vi redis.yaml
+		under container --> change the image name
+		kubectl apply -f redis.yaml
+		
+		
+ReplicaSets
+	To prevent loosing access to our application, we would like to have more than one instance or pod running at the same time, that way 
+	if one fails we still have our application running on the other one. The replication controller hepls us run multiple instances of a
+	single pod in the Kubernetes cluster, thus providing high availablity.
+	Even if you have a single pod Replication controller can help by automatically bringing up a new pod when the existing one fails.
+	Thus the replication controller ensures that the specified no. of pods are running at all time, even if it is just 1 or 100.
+	
+	Replication controller also helps in share the load across multiple pods. replication controller spans across multiple nodes in the cluster.
+	It helps us balance the load across multiple pods on different nodes as well as scale our application when the demand increases.
+	
+
+Replication Controller: older technology
+ReplicaSets: new recommended way.
+both serve the same purpose.
+
+1.To check no. of ReplicaSets exists in a system?
+	kubectl get replicaset OR kubectl get rs
+	
+2.How to create ReplicaSet?
+	kubectl create -f replicaset_definition.yml
+
+3.To check no. of desired pods in a Replicaset?
+	kubectl get replicaset
+		we can see under DESIRED column
+				
+4. what is the image used to create the pods in a Replicaset?
+	kubectl describe replicaset <replicaset name>
+		under Pod Template we can see the image section
+		
+5.To check no. ready pods in replicaset?
+	kubectl describe replicaset <replicaset name>
+		Pods Status
+			OR
+	kubectl get replicaset
+		we can see under READY column
+		
+6.To check why pods are not ready?
+	kubectl describe pod <pod name>
+		under Events section we can clearly read.
+		
+7.Delete any one of the POD from the replica set?
+	kubectl get pods
+		Kubectl delete pod <pod name> (take pod name from above command output)
+		
+8.Even if you delete a pod of a replicaset it is automatically going to recreate new one.
+
+9.kubectl explain replicaset __> this command gives detail explaination of yml file of replicaset.
+ 
+10.Deleting replicasets?
+	kubectl delete rs <replicaset name>
+	
+11.changing the existing replicaset with new image by deleting old image pods.
+	kubectl edit rs <replicaset name>
+		under spec
+			under container
+				change the image section 
+	kubectl get pods to check the status
+	kubectl delete pod <pod name> <pod name> <pod name>
+	we need to delte the older pods with old image, so as to let repicaset create new pods with new image.
+	kubectl get pods to check the status of new pods created
+	
+12.Scale the ReplicaSet?
+	kubectl scale rs <replicaset name> --replicas=5
+					OR
+	kubectl edit rs <replicaset name>
+		under spec
+			change replicas to desired number
+			
+
+Deployments
+
+	PODs, which deploy single instances of our application. Each container is encapsulated in PODs. Such multiple PODs are deployed using 
+	Replication Controllers or Replica Sets. And then comes Deployment which is a kubernetes object that comes higher in the hierarchy. 
+	The deployment provides us with capabilities to upgrade the underlying instances seamlessly using rolling updates, undo changes, 
+	and pause and resume changes as required. 
+	
+Creation of deployment using yml file.
+
+1. how many deployments exists on the system?
+	kubectl get deployments or deploy
+	
+2.Creating a deployment with yml file
+	kubectl create -f deployment_definition.yml
+	
+3.Create a deployment with commands
+	kubectl create deployment <name of deployment> --image=<image name> --replicas=3
+	
+4. kubectl create deployment --help --> this will show the available options.
+
+
+Services:
+	Kubernetes Services enable communication between various components within and outside of the application. For example, our application 
+	has groups of PODs running various sections, such as a group for serving front-end load to users, another group running back-end processes,
+	and a third group connecting to an external data source. It is Services that enable connectivity between these groups of PODs. Services 
+	enable the front-end application to be made available to users, it helps communication between back-end and front-end PODs, and helps in 
+	establishing connectivity to an external data source. Thus services enable loose coupling between microservices in our application.
+	
+	The kubernetes service is an object just like PODs, Replicaset or Deploymentsthat. One of its use case is to listen to a port on the Node 
+	and forward requests on that port to a port on the POD running the web application. This type of service is known as a NodePort service 
+	because the service listens to a port on the Node and forwards requests to PODs.
+	
+	NodePort were the service makes an internal POD accessible on a Port on the Node.
+	
+	Cluster IP, in this case service creates a virtual IP inside the cluster to enable communication between different services.
+	(front-end services to back-end services)
+	
+	Load balancer service, where it provisions a load balancer for our application in supported cloud providers.
+	
+	creating a service through yml file.(page no. 98) see the35 video at 10min onwards
+	
+	service uses random algorithm to distribute the load across the PODs. service acts as a built-in load balancer. 
+	
+	Each service gets an IP and name assigned to it inside the cluster, and that is the name that should be used by other pods to access 
+	the service. this type of service is known as cluster IP.
+	
+	Creating a cluster IP service through yml file. (cluster IP is the default type in yml file)
+	
+	Node port service helps us make an External facing application available on a port, on the worker nodes.
+	
+Endpoints: The pods that the service has identified that is going to direct traffic to based on the selector specfied on the service and the
+			labels on the pods.
+	
+1.How many services exist on the system?
+	kubectl get service or svc
+	
+2.What is the default Kubernetes service?
+	Cluster IP
+	
+3.what is the taget port configured on the service?
+	kubectl describe svc <service name>
+		In the TargetPort section we can see
+	
+4.How many labels are configured?
+	kubectl describe svc <service name>
+		In the Labels section we can see
+		
+5.How many endpoints are attached?
+	kubectl describe svc <service name>
+		In the Endpoints section we can see
+		
+6.Creating a service.
+	kubectl create -f service-definition.yaml
+	
+	
+Namespaces: we create pods, services and deployments within the namespace. This namespace is known as default namespace and it is created 
+automatically by Kubernetes when the cluster is first set up.
+Kubernetes creates a set of Pods and services for its internal purpose(networking solution, DNS service) to isolate these from user and 
+prevent you from accidentally deleting or modifying these services, Kubernetes creates them under another namespace created at cluster
+startup named kube-system. 
+third namespace created by Kubernetes automatically is called kube-public. This is where resources that should be made available to all
+users are created. 
+Resources within a namespace can refer to each other simply by their names. 
+ex: mysql.connect("db-service")
+if Resources(default namespace) want to refer to another resources(dev namespace) in a different namespace, we append the name of the namespace to the name of the service.
+ex: mysql.connect("db-service.dev.svc.cluster.local")
+the above is possible bcs when the service is created, a DNS entry is added automatically in the above format. 
+"db-service.dev.svc.cluster.local"
+cluster.local --> default domain name of the kubernetes cluster
+svc --> subdomain for service
+dev --> namespace
+db-service --> service name.
+
+Kubectl get pods --> This command lists all the pods only in default namespace.
+Kubectl get pods --namespace=kube-system (name of the namespace)--> To list pods in another namespace
+
+kubectl create -f pod-definition.yml --namespace=dev  --> to create a pod in different namespace.
+If you want your pods to create in a specific namespace other than default, you can specify it in namespace section under metadata secton 
+in yaml file. You don't have to specify in command-line then.
+
+Creating a namespace
+kubectl create -f namespace-dev.yml
+               OR
+kubectl create namespace dev
+
+If we want to switch to some namespace other than default. then we need to configure
+kubectl config set-context $(kubectl config current-context) --namespace=dev
+after setting the above command if you run kubectl get pods then it only lists configured namespace pods.
+
+kubectl get pods --all-namespaces  --> to get all pods in all the namespaces
+
+To limit resources in a namespace, create a resource quota.
+
+1.To check the existing namespaces in a system?
+	kubectl get namespaces or ns
+	
+2.How many pods exist ina particular namespace?
+	kubectl get pods --namespace=<namespace name>
+						OR
+	kubectl get pods -n=<namespace name>
+	
+3.Create a pod in finance namespace with name:redis and image name:redis
+	kubectl run redis --image=redis -n=finance
+	
+4.Which namespace has blue pod in it?
+	kubectl get pods --all-namespaces OR kubectl get pods -A
+		under NAME column
+	
+5.What DNS name should the Blue application use to access the database db-service in its own namespace -marketing?
+	kubectl get pods -n=marketing 
+				OR
+	kubectl get svc -n=marketing
+	just by db-service(host name) and host port you can access it
+	
+6.What DNS name should the Blue application use to access the database db-service in a namespace -dev?
+	kubectl get pods -n=marketing 
+				OR
+	kubectl get svc -n=dev
+	db-service.dev.svc.cluster.local and host port
+	
+
+Imperative and Declarative
+	We created objects directly by running commands as well as using object configuration file. 
+	In the Infrastructure-as-code world, there are different approaches in managing the infrastructure, they are classified into 
+	1. Imperative: specifying what to do and how to do is imperative approach. giving step by step instructions.
+	2. Declarative: specifying what to do and not how to do is declarative approach.
+		
+Declarative approach would be to create a set of files that defines the expected state of the applications and services on a Kubernetes 
+cluster. And with a single kubectl apply command, Kubernetes should be able to read the configuration files and decide by itself what needs
+to be done to bring the infrastructure to the expected state.
+In the declarative approach you will run the kubectl apply command for creating, updating or deleting an object. The apply command will look
+at the existing configuration and figure out what changes need to e made to the sytem.
+
+Creating object definition files or configuration files or manifest files, can help us write down what exactly we need the object to look
+like in a yaml format. and use the kubectl create command to create the object.
+
+
+Imperative commands
+
+1.Deploy a pod named nginx-pod using nginx:alpine image
+		kubectl run nginx-pod --image=nginx:alpine
+		
+2.Deploy a redis pod using the redis:alpine image with the labels set to tier=db
+	kubectl run redis --image=redis:alpine --labels="tier=db"
+	
+3.Create a service redis-service to expose the redis application within the cluster on port 6379, service type is ClusterIP.
+	kubectl expose pod redis --port 6379 --name redis-service
+	(we need to make sure what is application is of pod, deployment or replicaset)
+	
+4.Create a deployment named webapp using the image kodekloud/webapp-color with 3 replicas.
+	kubectl create deployment webapp --image=kodekloud/webapp-color --replicas=3
+	
+5.Create a new pod called custom-nginx using the nginx image and expose it on container port 8080.
+	kubectl run custom-nginx --image=nginx --port=8080
+	
+6.Create a namespace called dev-ns?
+	kubectl create namespace dev-ns
+	
+7.Create a new deployment called redis-deploy in the dev-ns namespace with the redis image. it should have 2 replicas.
+	kubectl create deployment redis-deploy --image=redis --replicas=2 -n dev-ns
+	To verify the created deployments
+		kubectl get deployment -n dev-ns
+		
+8.Create a pod called httpd using the image httpd:alpine in the default namespace. create a service of type ClusterIP by the same name(httpd). 
+The target port for the service should be 80.
+	kubectl run httpd --image=httpd:alpine --port=80 --expose=true
+	--expose=true --> If expose is set to true creates a ClusterIP service associated with the pod. 
+	
+
+
+Declarative commands
+	The kubectl apply command takes into consideration the local configuration file, the live object definition on Kubernetes and the last applied configuration
+	before making a decision on what changes are to be made. 
+	when we run the kubectl apply command, if the object already does't exist, the object is created, when the object is created, an object configuration, 
+	similar to what we created locally is created within Kubernetes but with additional fields to store status of the object. This is the live configuration
+	of the object on the Kubernetes cluster. This is how Kubernetes internally stores information about an object, no matter what approach you use to create
+	the object.
+	when you use the kubectl apply command the YAML version of the local object configuration file we wrote is converted to a json format, and it is stored 
+	as the last applied configuration. Going forward for any updates to the object, all the three are compared to identify what changes are to be made on 
+	the live object. 
+	Last applied configuration helps us figure out what field have been removed from the local file.
+	Last applied configuration is saved on the live object configuration on the Kubernetes cluster itself as an annotation named as last applied configuration.
+	This is only done in Kubectl apply command and not in Kubectl crate or update command, they do not store the Last applied configuration.
+	we should not club both imperative and declarative approaches while managing the Kubernetes objects. 
